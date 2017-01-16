@@ -1,4 +1,4 @@
-package imgview;
+package tavizu;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("uibase.fxml"));
-        primaryStage.setTitle("ImgView1");
+        primaryStage.setTitle("tavizu");
         Scene scene = new Scene(root, 800,500);
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE)

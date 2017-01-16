@@ -1,4 +1,4 @@
-package imgview;
+package tavizu;
 
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.image.Image;

@@ -1,4 +1,4 @@
-package imgview;
+package tavizu;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ListChangeListener;

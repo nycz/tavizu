@@ -1,4 +1,4 @@
-package imgview;
+package tavizu;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
