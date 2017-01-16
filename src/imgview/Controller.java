@@ -3,19 +3,14 @@ package imgview;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 
 import java.io.File;
-import java.util.List;
 
 public class Controller {
     @FXML private TextField addressBar;
@@ -23,7 +18,12 @@ public class Controller {
     private File lastPath;
     private ImageFlowView imageFlowView;
     private ObservableList<ImageItem> imageList;
-//    private ImageListModel imageListModel;
+
+    @FXML private TextField terminalInput;
+    @FXML private TextField terminalOutput;
+
+    @FXML private ToggleGroup sortDirection;
+    @FXML private ToggleGroup sortKey;
 
     // Info box
     @FXML private VBox infoBox;
@@ -38,16 +38,14 @@ public class Controller {
     @FXML
     public void initialize() {
         imageList = FXCollections.observableArrayList();
-//        imageListModel = new ImageListModel();
-        imageFlowView = new ImageFlowView(imageList);
+        imageFlowView = new ImageFlowView(imageList, sortDirection.selectedToggleProperty(),
+                                          sortKey.selectedToggleProperty());
         // TODO: no hardcoded default path
         lastPath = new File("pics").getAbsoluteFile();
         addressBar.setText(lastPath.toString());
         rootContainer.setCenter(imageFlowView);
-//        imageContainer.getChildren().add(imageFlowView);
         loadImages(lastPath);
     }
-
 
     private void updateInfoBox(ImageItem img) {
         infoBox.setVisible(true);
@@ -60,7 +58,6 @@ public class Controller {
     }
 
     private void loadImages(File directory) {
-//        imageContainer.getChildren().clear();
         imageList.clear();
         File[] images = directory.listFiles((File dir, String name) ->
                             name.endsWith(".png") || name.endsWith(".jpg"));
@@ -68,34 +65,7 @@ public class Controller {
             ImageItem imageItem = new ImageItem(imagePath);
             imageItem.setOnMousePressed(event -> {updateInfoBox(imageItem);});
             imageList.add(imageItem);
-//            imageContainer.getChildren().add(imageItem);
         }
-
-
-////        List<ImageFile> images = imageList.loadImages(directory);
-//        for (int i = 0; i < images.size(); i++) {
-////        for (ImageFile imageFile : images) {
-//            ImageFile imageFile = images.get(i);
-//            ImageFlowView iv = new ImageFlowView(imageFile.getImage());
-//            iv.setFitHeight(thumbnailHeight);
-//            iv.setFitWidth(thumbnailWidth);
-//            iv.setSmooth(true);
-//            iv.setPreserveRatio(true);
-//            iv.setOnMousePressed(event -> {
-//                    // TODO: don't select by number ffs
-//                    imageList.select(imageFile, iv);
-//                    updateInfoBox(iv);
-//            });
-//            imageContainer.getChildren().add(iv);
-//        }
-
-//        File[] images = directory.listFiles((File dir, String name) ->
-//                            name.endsWith(".png") || name.endsWith(".jpg"));
-//        for (File imagePath : images) {
-//            imageContainer.getChildren().add(new ImageFlowView(new Image("file:"+imagePath.getPath(),
-//                    thumbnailWidth, thumbnailHeight,
-//                    true, true, true)));
-//        }
     }
 
     @FXML
@@ -115,5 +85,27 @@ public class Controller {
             // TODO: better error handling here
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void handleTerminalInput(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            runCommand();
+        }
+    }
+
+    private void runCommand() {
+        String[] input = terminalInput.getText().split("\\s+", 2);
+        String cmd = input[0];
+        String arg = input.length == 2 ? input[1] : "";
+
+//        switch (cmd) {
+//            case "sort-key":
+//
+//                switch (arg) {
+//
+//                imageFlowView.setSortDirection();
+//        }
+
     }
 }
