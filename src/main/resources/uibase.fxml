@@ -9,7 +9,9 @@
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.ToggleGroup?>
-<BorderPane fx:controller="tavizu.Controller" fx:id="rootContainer"
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<BorderPane fx:controller="main.java.tavizu.Controller" fx:id="rootContainer"
             xmlns:fx="http://javafx.com/fxml">
     <top>
         <HBox>
@@ -19,29 +21,30 @@
                        disable="true"/>
             <MenuButton text="🔧">
                 <fx:define>
-                    <ToggleGroup fx:id="sortDirection"/>
-                    <ToggleGroup fx:id="sortKey" />
+                    <ToggleGroup fx:id="sortDirectionGroup"/>
+                    <ToggleGroup fx:id="sortKeyGroup" />
                 </fx:define>
                 <items>
                     <Menu text="Sort">
                         <RadioMenuItem fx:id="sortKeyLastModified" text="Last modified"
-                                       toggleGroup="$sortKey"/>
+                                       toggleGroup="$sortKeyGroup"/>
                         <RadioMenuItem fx:id="sortKeyName" text="Name" selected="true"
-                                       toggleGroup="$sortKey"/>
-                        <RadioMenuItem fx:id="sortKeySize" text="Size" toggleGroup="$sortKey"/>
+                                       toggleGroup="$sortKeyGroup"/>
+                        <RadioMenuItem fx:id="sortKeySize" text="Size" toggleGroup="$sortKeyGroup"/>
                         <SeparatorMenuItem/>
                         <RadioMenuItem fx:id="sortAscending" text="Ascending"
-                                       selected="true" toggleGroup="$sortDirection"/>
+                                       selected="true" toggleGroup="$sortDirectionGroup"/>
                         <RadioMenuItem fx:id="sortDescending" text="Descending"
-                                       toggleGroup="$sortDirection"/>
+                                       toggleGroup="$sortDirectionGroup"/>
                     </Menu>
                 </items>
             </MenuButton>
         </HBox>
     </top>
     <center>
-        <!--<FlowPane fx:id="imageContainer"/>-->
-        <!--<fx:include fx:id="thumbnailView" source="thumbnailview.fxml"/>-->
+        <ScrollPane fitToWidth="true">
+            <FlowPane fx:id="imagePane"/>
+        </ScrollPane>
     </center>
     <bottom>
         <VBox>

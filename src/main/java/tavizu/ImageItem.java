@@ -1,4 +1,4 @@
-package tavizu;
+package main.java.tavizu;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -31,4 +31,6 @@ public class ImageItem extends BorderPane {
     public File getFile() {
         return path;
     }
+
+    public ImageView getImageView() { return imageView; }
 }

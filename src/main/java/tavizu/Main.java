@@ -1,4 +1,4 @@
-package tavizu;
+package main.java.tavizu;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("uibase.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/uibase.fxml"));
         primaryStage.setTitle("tavizu");
         Scene scene = new Scene(root, 800,500);
         scene.setOnKeyPressed(event -> {
