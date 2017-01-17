@@ -21,9 +21,6 @@ public class Controller {
     @FXML private FlowPane imagePane;
     private ObservableList<ImageItem> imageList;
 
-    @FXML private TextField terminalInput;
-    @FXML private TextField terminalOutput;
-
     @FXML private ToggleGroup sortDirectionGroup;
     @FXML private ToggleGroup sortKeyGroup;
 
@@ -119,68 +116,6 @@ public class Controller {
         }
     }
 
-    @FXML
-    public void handleTerminalInput(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            runCommand();
-        }
-    }
-
-    private void runCommand() {
-        String[] input = terminalInput.getText().split("\\s+", 2);
-        String cmd = input[0];
-        String arg = input.length == 2 ? input[1] : "";
-        System.out.printf("cmd: \"%s\", arg: \"%s\"", cmd, arg);
-        SortKey key = sortKey;
-        SortDirection dir = sortDirection;
-        switch (cmd) {
-            case "sort-key":
-                switch (arg) {
-                    case "date":
-                        key = SortKey.LASTMODIFIED;
-                        break;
-                    case "size":
-                        key = SortKey.SIZE;
-                        break;
-                    case "name":
-                        key = SortKey.NAME;
-                        break;
-                    default:
-                        terminalOutput.setText("invalid key");
-                }
-                break;
-            case "sort-dir":
-                switch (arg) {
-                    case "desc":
-                    case "descending":
-                        dir = SortDirection.DESCENDING;
-                        break;
-                    case "asc":
-                    case "ascending":
-                        dir = SortDirection.ASCENDING;
-                        break;
-                    default:
-                        terminalOutput.setText("invalid direction");
-                }
-                break;
-            case "thumbsize":
-                int newSize;
-                try {
-                    newSize = Integer.parseInt(arg);
-                    thumbnailHeight = newSize;
-                    thumbnailWidth = newSize;
-                    updateThumbnailSizes();
-                } catch (NumberFormatException nfe) {
-                    terminalOutput.setText("invalid thumbnail size");
-                }
-        }
-        if (key != sortKey || dir != sortDirection) {
-            sortKey = key;
-            sortDirection = dir;
-            reloadImages();
-        }
-        terminalInput.clear();
-    }
 
     private void updateThumbnailSizes() {
         for (ImageItem imageItem : imageList) {

@@ -1,0 +1,9 @@
+<?import javafx.scene.control.TextField?>
+<?import main.java.tavizu.SimpleAutoCompletionPopup?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="main.java.tavizu.TerminalController">
+    <SimpleAutoCompletionPopup fx:id="autoCompletionPopup"
+                               visible="false" managed="false" />
+    <TextField fx:id="terminalInput" />
+    <TextField fx:id="terminalOutput" editable="false" />
+</VBox>

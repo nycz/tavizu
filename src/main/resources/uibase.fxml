@@ -11,6 +11,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import main.java.tavizu.SimpleAutoCompletionPopup?>
 <BorderPane fx:controller="main.java.tavizu.Controller" fx:id="rootContainer"
             xmlns:fx="http://javafx.com/fxml">
     <top>
@@ -47,10 +48,7 @@
         </ScrollPane>
     </center>
     <bottom>
-        <VBox>
-            <TextField fx:id="terminalInput" onKeyPressed="#handleTerminalInput"/>
-            <TextField fx:id="terminalOutput" editable="false"/>
-        </VBox>
+        <fx:include source="terminal.fxml"/>
     </bottom>
     <right>
         <VBox fx:id="infoBox" visible="false">
