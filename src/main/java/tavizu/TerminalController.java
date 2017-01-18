@@ -1,12 +1,9 @@
 package main.java.tavizu;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
@@ -40,8 +37,8 @@ public class TerminalController {
                     event.consume();
                 }
             }
-
         });
+        Platform.runLater(() -> terminalInput.requestFocus());
     }
 
     private void setAutoCompletionPrefix(String prefix) {
