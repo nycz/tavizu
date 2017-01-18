@@ -7,15 +7,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TerminalController {
     // TODO: use an ObservableList and a FilteredList instead
-    private final String[] commands = {
-            "sort-key",
-            "sort-direction",
-            "help"
-    };
+    private Map<String, Command> commands = new HashMap<>();
 
     @FXML private TextField terminalInput;
     @FXML private TextField terminalOutput;
@@ -38,6 +36,7 @@ public class TerminalController {
                 }
             }
         });
+        // has to run later to let everything initialize fully first
         Platform.runLater(() -> terminalInput.requestFocus());
     }
 
@@ -46,7 +45,7 @@ public class TerminalController {
             autoCompletionPopup.hide();
         } else {
             List<String> suggestedCommands = new ArrayList<>();
-            for (String command : commands) {
+            for (String command : commands.keySet()) {
                 if (command.startsWith(prefix)) {
                     suggestedCommands.add(command);
                 }
@@ -63,13 +62,12 @@ public class TerminalController {
         }
     }
 
-    @FXML
-    public void handleTerminalInput(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            runCommand();
-        } else if (event.getCode() == KeyCode.TAB) {
-            System.out.println("DED");
-        }
+    protected void print(String text) {
+        terminalOutput.setText(text);
+    }
+
+    protected void printError(String text) {
+        terminalOutput.setText("Error: " + text);
     }
 
     private void runCommand() {
@@ -77,6 +75,16 @@ public class TerminalController {
         String cmd = input[0];
         String arg = input.length == 2 ? input[1] : "";
         System.out.printf("cmd: \"%s\", arg: \"%s\"", cmd, arg);
+        if (!commands.containsKey(cmd)) {
+            printError("Invalid command");
+        } else {
+            for (Map.Entry<String, Command> command : commands.entrySet()) {
+                if (command.getKey().equals(cmd)) {
+                    command.getValue().run(arg);
+                    break;
+                }
+            }
+        }
 //        switch (cmd) {
 ////            case "test":
 ////                ObservableList<String> testList = FXCollections.observableArrayList();
@@ -133,4 +141,7 @@ public class TerminalController {
         terminalInput.clear();
     }
 
+    public void registerCommand(String name, Command callback) {
+        commands.put(name, callback);
+    }
 }

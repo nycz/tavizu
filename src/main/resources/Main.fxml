@@ -1,0 +1,17 @@
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TextField?>
+<BorderPane fx:controller="main.java.tavizu.MainController"
+            fx:id="rootContainer" xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <TextField fx:id="addressBar"/>
+    </top>
+    <center>
+        <fx:include fx:id="thumbnailPane" source="ThumbnailPane.fxml"/>
+    </center>
+    <bottom>
+        <fx:include fx:id="terminal" source="Terminal.fxml"/>
+    </bottom>
+    <right>
+        <fx:include fx:id="infoSidebar" source="InfoSidebar.fxml"/>
+    </right>
+</BorderPane>

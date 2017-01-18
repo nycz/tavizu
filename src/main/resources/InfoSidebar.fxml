@@ -1,0 +1,9 @@
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<VBox fx:controller="main.java.tavizu.InfoSidebarController"
+      xmlns:fx="http://javafx.com/fxml" fx:id="infoBox" visible="false">
+    <Label fx:id="infoName"/>
+    <Label fx:id="infoDimensions"/>
+    <Label fx:id="infoSize"/>
+    <Label fx:id="infoModified"/>
+</VBox>

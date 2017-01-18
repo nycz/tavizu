@@ -11,10 +11,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/uibase.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Main.fxml"));
         primaryStage.setTitle("tavizu");
         Scene scene = new Scene(root, 800,500);
-        scene.getStylesheets().add("/main/resources/main.css");
+        scene.getStylesheets().add("/Main.css");
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE)
                 Platform.exit();
