@@ -5,8 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
@@ -31,8 +29,8 @@ public class Controller {
     @FXML private Label infoSize;
     @FXML private Label infoModified;
 
-    private double thumbnailWidth = 200;
-    private double thumbnailHeight = 200;
+    private double thumbnailWidth = 140;
+    private double thumbnailHeight = 140;
 
     enum SortDirection {ASCENDING, DESCENDING}
     enum SortKey {LASTMODIFIED, NAME, SIZE}
@@ -67,6 +65,7 @@ public class Controller {
         for (File imagePath : images) {
             ImageItem imageItem = new ImageItem(imagePath);
             imageItem.setOnMousePressed(event -> updateInfoBox(imageItem));
+            imageItem.setSizeConstraints(thumbnailWidth, thumbnailHeight);
             imageList.add(imageItem);
         }
         reloadImages();
@@ -95,6 +94,7 @@ public class Controller {
             }
             return sortDirection == SortDirection.ASCENDING ? result : -result;
         });
+
     }
 
     @FXML
@@ -119,8 +119,7 @@ public class Controller {
 
     private void updateThumbnailSizes() {
         for (ImageItem imageItem : imageList) {
-            imageItem.getImageView().setFitWidth(thumbnailWidth);
-            imageItem.getImageView().setFitHeight(thumbnailHeight);
+            imageItem.setSizeConstraints(thumbnailWidth, thumbnailWidth);
         }
     }
 }
