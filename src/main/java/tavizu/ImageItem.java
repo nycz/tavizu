@@ -15,6 +15,7 @@ public class ImageItem extends VBox {
 
     public ImageItem(File path) {
         this.path = path;
+        getStyleClass().add("image-item");
         image = new Image("file:" + path.getPath(), true);
         imageView = new ImageView(image);
         imageView.setSmooth(true);

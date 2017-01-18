@@ -1,0 +1,39 @@
+
+#rootContainer, .scroll-pane, .scroll-pane > .viewport , #imagePane {
+    -fx-background-color: #303137;
+}
+.scroll-pane {
+    -fx-padding: 0px;
+}
+
+#imagePane {
+    -fx-padding: 10px;
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+}
+
+.image-item {
+    -fx-background-color: rgba(255,255,255,0.05);
+    -fx-border-width: 1px;
+    -fx-padding: 6px;
+    -fx-border-color: #111;
+}
+
+.image-item .label, #terminalContainer * {
+    -fx-text-fill: #eeeeee;
+}
+
+#terminalContainer {
+    -fx-background-color: #111;
+    -fx-spacing: 2px;
+    -fx-padding: 2px;
+}
+
+#terminalInput, #terminalOutput {
+    -fx-background-color: #222;
+    -fx-background-radius: 0px;
+}
+
+#statusBar {
+    -fx-background-color: #333;
+}

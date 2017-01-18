@@ -11,7 +11,6 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.FlowPane?>
-<?import main.java.tavizu.SimpleAutoCompletionPopup?>
 <BorderPane fx:controller="main.java.tavizu.Controller" fx:id="rootContainer"
             xmlns:fx="http://javafx.com/fxml">
     <top>
@@ -48,7 +47,12 @@
         </ScrollPane>
     </center>
     <bottom>
-        <fx:include source="terminal.fxml"/>
+        <VBox>
+            <fx:include fx:id="terminal" source="terminal.fxml"/>
+            <HBox fx:id="statusBar">
+                <Label fx:id="sortStatusLabel" />
+            </HBox>
+        </VBox>
     </bottom>
     <right>
         <VBox fx:id="infoBox" visible="false">
